@@ -332,8 +332,19 @@ class Controller_Users extends Controller_Base
     {
         /*return $this->respuesta(500, 'trace');
         exit;*/
+        /*$user = new Model_Users();
+        if ($user->active == 1){
         $users = Model_Users::find('all');
         return $this->response(Arr::reindex($users));
+    }*/
+
+         $users = Model_Users::find('all', array(
+            'where' => array(
+                array('active', 1),
+             
+            )
+        ));
+         return $this->response(Arr::reindex($users));
     }
 
     public function isEmailCreated($email)

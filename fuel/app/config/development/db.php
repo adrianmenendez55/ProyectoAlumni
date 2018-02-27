@@ -4,21 +4,21 @@
  */
 
 return array(
-	'default' => array(
+	/*'default' => array(
 		'connection'  => array(
 			'dsn'        => 'mysql:host=localhost;dbname=alumni',
 			'username'   => 'alumni',
 			'password'   => 'PN0hVOFh42lmgapw',
 		),
 	),
-
-	/*'default' => array(
+*/
+	'default' => array(
 		'connection'  => array(
 			'dsn'        => 'mysql:host=localhost;dbname=alumni',
 			'username'   => 'alumnos',
 			'password'   => 'cev',
 		),
-	),*/
+	),
 	
 
 );
