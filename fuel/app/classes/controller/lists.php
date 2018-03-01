@@ -64,7 +64,7 @@ class Controller_Lists extends Controller_Rest
         return $this->response(Arr::reindex($lists));
     }
 
-        public function isListCreated($title)
+    public function isListCreated($title)
     {
         $lists = Model_Lists::find('all', array(
             'where' => array(
@@ -81,4 +81,39 @@ class Controller_Lists extends Controller_Rest
         }
     }
 
+    public function post_users()
+    {
+        if (empty($_POST['id']))
+        {
+            $json = $this->response(array(
+                'code' => 400,
+                'message' =>  'Falta algun campo'
+            ));
+            return $json;            
+        }
+        else
+        {
+            $id_list = $_POST['id'];
+
+            $list = Model_Lists::find('all', array(
+                'where' => array(
+                    array('id', $id_list)
+                )
+            ));
+
+            if(isset($list))
+            {
+                $json = $this->response(array(
+                    'code' => 200,
+                    'message' =>  'Usuarios de la lista',
+                    'data' => ['users' => $list]
+                ));
+                return $json; 
+            }
+            else
+            {
+                return $this->respuesta(400, 'La lista no existe', []);
+            } 
+        }
+    }
 }

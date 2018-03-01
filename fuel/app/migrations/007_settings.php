@@ -8,8 +8,9 @@ class Settings
     {
         \DBUtil::create_table('settings', array(
             'id' => array('type' => 'int', 'constraint' => 5, 'auto_increment' => true),
-            'sound' => array('type' => 'varchar', 'constraint' => 100),
-            'notifications' => array('type' => 'varchar', 'constraint' => 100),
+            'location' => array('type' => 'int', 'constraint' => 1),
+            'notifications' => array('type' => 'int', 'constraint' => 1),
+            'information' => array('type' => 'int', 'constraint' => 1),
             'id_user' => array('type' => 'int', 'constraint' => 5),
 
             

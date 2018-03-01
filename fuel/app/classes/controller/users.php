@@ -147,6 +147,15 @@ class Controller_Users extends Controller_Base
                     $user->password = $input['password'];
                     $user->active = 1;
                     $user->save();
+
+
+                    $settings = new Model_Settings();
+                    $settings->location = 1;
+                    $settings->notifications = 1;
+                    $settings->information = 1;
+                    $settings->id_user = $user->id;
+                    $settings->save();
+
                     $dataToken = array(
                         "username" => $username,
                         "password" => $password
@@ -155,7 +164,7 @@ class Controller_Users extends Controller_Base
                     $json = $this->response(array(
                         'code' => 200,
                         'message' => 'Usuario creado',
-                        'data' => $token
+                        'data' => ['token' => $token, 'settings' => $settings]
                     ));
           
                     return $json;
@@ -491,6 +500,105 @@ class Controller_Users extends Controller_Base
                     ));
             }
         }
-    }            
+    }
 
+    public function post_user()
+    {
+        try
+        {
+            /*$header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }
+            else
+            {
+                return $this->respuesta(400, 'Usuario no logueado', []);
+            }*/
+            if(isset($_POST['id_user']))
+            {
+                if(empty($_POST['id_user']))
+                {
+                    return $this->respuesta(400, 'Usuario no introducido', []);
+                }
+                else
+                {   
+                    $id = $_POST['id_user'];
+                    $users = Model_Users::find($id);
+                    return $this->respuesta(200, 'Usuario devuelto', ['user' => $users]);
+                }
+            }
+            else
+            {
+                return $this->respuesta(400, 'Usuario no existente', []);
+            }
+        }
+        catch(Exception $e)
+        {
+            return $this->respuesta(500, $e->getMessage(), []);
+        }
+    }
+
+    public function post_editSettings()
+    {
+        if(empty($_POST['id_user']) || !isset($_POST['location']) || !isset($_POST['notifications']) || !isset($_POST['information']) )
+        {
+            return $this->respuesta(400, 'Existen campos vacíos', []);
+        }
+        else
+        {
+            $id = $_POST['id_user'];
+            $location = $_POST['location'];
+            $notifications = $_POST['notifications'];
+            $information = $_POST['information'];
+
+
+            $userSettings = Model_Settings::find($id);
+
+            if (isset($userSettings))
+            {
+                
+                // Localización
+                if($location != 0 && $location != 1)
+                {
+                    //var_dump($location);
+                    return $this->respuesta(400, 'Localizacion. Introduce 1 para permitir, 0 para no permitir', []);
+                }
+                else
+                {
+                    $userSettings->location = $location;
+                }
+
+                // Notificaciones
+                if($notifications != 0 && $notifications != 1)
+                {
+                    return $this->respuesta(400, 'Notificaciones. Introduce 1 para permitir, 0 para no permitir', []);
+                }
+                else
+                {
+                    $userSettings->notifications = $notifications;
+                }
+
+                // Información
+                if($information != 0 && $information != 1)
+                {
+                    return $this->respuesta(400, 'Información. Introduce 1 para permitir, 0 para no permitir', []);
+                }
+                else
+                {
+                    $userSettings->information = $information;
+                }
+
+                $userSettings->save();
+
+                return $this->respuesta(200, 'Ajustes cambiados', ['settings' => $userSettings]);
+
+            }
+            else
+            {
+                return $this->respuesta(400, 'El usuario no existe', []);
+            }
+        }  
+    }       
 }
