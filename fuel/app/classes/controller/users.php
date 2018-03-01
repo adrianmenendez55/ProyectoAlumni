@@ -627,8 +627,8 @@ class Controller_Users extends Controller_Base
             Upload::save();
             foreach(Upload::get_files() as $file)
             {
-                $image = Model_Users::find($dataJwtUser);
-                $image->image_profile = $file;
+                $image = Model_Users::find($dataJwtUser->id);
+                $image->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];
                 $image->save();
             }
         }
@@ -641,6 +641,8 @@ class Controller_Users extends Controller_Base
         }
         return $this->response(array(
             'code' => 200,
+            'message' => 'Foto subida correctamente',
+            'data' => []
         ));
     }   
 }
