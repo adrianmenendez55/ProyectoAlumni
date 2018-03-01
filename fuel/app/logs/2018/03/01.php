@@ -102,3 +102,39 @@ WARNING - 2018-03-01 13:02:58 --> Fuel\Core\Fuel::init - The configured locale e
 WARNING - 2018-03-01 13:03:53 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2018-03-01 13:04:06 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2018-03-01 13:04:43 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-01 13:23:54 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:23:54 --> Error - No uploaded files were found. Did you specify "enctype" in your &lt;form&gt; tag? in /var/www/html/AlumniFinal/fuel/vendor/fuelphp/upload/src/Upload.php on line 92
+WARNING - 2018-03-01 13:27:40 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:27:40 --> Error - No uploaded files were found. Did you specify "enctype" in your &lt;form&gt; tag? in /var/www/html/AlumniFinal/fuel/vendor/fuelphp/upload/src/Upload.php on line 92
+WARNING - 2018-03-01 13:29:45 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:29:45 --> Error - No uploaded files were found. Did you specify "enctype" in your &lt;form&gt; tag? in /var/www/html/AlumniFinal/fuel/vendor/fuelphp/upload/src/Upload.php on line 92
+WARNING - 2018-03-01 13:30:05 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:30:05 --> 42000 - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')), null)' at line 1 with query: "INSERT INTO `users` (`username`, `password`, `email`, `active`, `image_profile`, `id_rol`) VALUES (null, null, null, null, ('image_profile', '3eec57494ee79c9b417efa7f1a19a9ac.jpeg', 'La-anécdota-sobre-la-famosa-e-icónica-foto-de-Albert-Einstein-sacando-la-lengua.jpeg', 'image/jpeg', '/tmp/phpmKUab2', '0', 27599, 'jpeg', 'La-anécdota-sobre-la-famosa-e-icónica-foto-de-Albert-Einstein-sacando-la-lengua', 'image/jpeg', '/var/www/html/AlumniFinal/public/assets/img/', ()), null)" in /var/www/html/AlumniFinal/fuel/core/classes/database/pdo/connection.php on line 253
+WARNING - 2018-03-01 13:34:25 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:34:25 --> Error - syntax error, unexpected ':' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 632
+WARNING - 2018-03-01 13:34:39 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:34:39 --> Error - syntax error, unexpected 'find' (T_STRING), expecting variable (T_VARIABLE) or '$' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 632
+WARNING - 2018-03-01 13:36:09 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:36:09 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 613
+WARNING - 2018-03-01 13:37:28 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:37:28 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:38:02 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:38:02 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:38:32 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:38:32 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:42:37 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:42:37 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:43:01 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:43:01 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:43:22 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:43:22 --> Error - syntax error, unexpected 'else' (T_ELSE) in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 615
+WARNING - 2018-03-01 13:45:52 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:45:52 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:48:14 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:48:14 --> Error - syntax error, unexpected '}' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 614
+WARNING - 2018-03-01 13:48:51 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:48:51 --> Error - syntax error, unexpected 'find' (T_STRING), expecting variable (T_VARIABLE) or '$' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 631
+WARNING - 2018-03-01 13:49:22 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:49:22 --> Error - syntax error, unexpected 'find' (T_STRING), expecting variable (T_VARIABLE) or '$' in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 630
+WARNING - 2018-03-01 13:50:51 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+ERROR - 2018-03-01 13:50:51 --> Warning - Creating default object from empty value in /var/www/html/AlumniFinal/fuel/app/classes/controller/users.php on line 631
