@@ -11,4 +11,16 @@ class Model_Lists extends Orm\Model
        
     );
 
+    protected static $_many_many = array(
+    'users' => array(
+            'key_from' => 'id',
+            'key_through_from' => 'id_list',
+            'table_through' => 'belong',
+            'key_through_to' => 'id_user',
+            'model_to' => 'Model_Belong',
+            'key_to' => 'id',
+            'cascade_save' => true,
+            'cascade_delete' => false,
+        )
+    );
  }

@@ -82,6 +82,7 @@ class Controller_Board extends Controller_Rest
                 $board->description = $input['description'];
                 $board->group = $input['group'];
 
+
                 /* isset de localization y link*/
 
                 if (isset($input['localization']))
@@ -91,6 +92,40 @@ class Controller_Board extends Controller_Rest
                 if (isset($input['link']))
                 {
                     $board->link = $input['link'];
+                }
+
+                if (isset($_FILES['image_board']))
+                {
+                    // Custom configuration for this upload
+                    $config = array(
+                        'path' => DOCROOT . 'assets/img',
+                        'randomize' => true,
+                        'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+                    );
+
+                    // process the uploaded files in $_FILES
+                    Upload::process($config);
+                    // if there are any valid files
+                    if (Upload::is_valid())
+                    {
+                        // save them according to the config
+                        Upload::save();
+                        foreach(Upload::get_files() as $file)
+                        {
+                            $board->image_board = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];
+                            $board->save();
+                        }
+                    }
+                        // and process any errors
+                        foreach (Upload::get_errors() as $file)
+                        {
+                            return $this->response(array(
+                            'code' => 500,
+                            ));
+                        }
+                        return $this->response(array(
+                            'code' => 200,
+                            ));
                 }
 
                 $board->save();

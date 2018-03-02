@@ -81,39 +81,91 @@ class Controller_Lists extends Controller_Rest
         }
     }
 
-    public function post_users()
+    public function post_addUser()
     {
-        if (empty($_POST['id']))
+        try
         {
-            $json = $this->response(array(
-                'code' => 400,
-                'message' =>  'Falta algun campo'
-            ));
-            return $json;            
-        }
-        else
-        {
-            $id_list = $_POST['id'];
+            /*$header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }*/
 
-            $list = Model_Lists::find('all', array(
-                'where' => array(
-                    array('id', $id_list)
-                )
-            ));
-
-            if(isset($list))
+            if(empty($_POST['id_user']) || empty($_POST['id_list']))
             {
                 $json = $this->response(array(
-                    'code' => 200,
-                    'message' =>  'Usuarios de la lista',
-                    'data' => ['users' => $list]
+                    'code' => 400,
+                    'message' => 'Campos vacíos',
+                    'data' => []
                 ));
-                return $json; 
+                return $json;
             }
             else
             {
-                return $this->respuesta(400, 'La lista no existe', []);
-            } 
+                $id_user = $_POST['id_user'];
+                $id_list = $_POST['id_list'];
+
+                $user = Model_Users::find($id_user);
+                $list = Model_Lists::find($id_list);
+
+                if(isset($id_user) || !empty($id_user) || isset($id_list) || !empty($id_list))
+                {
+                    $belong = Model_Belong::find('all', array(
+                        'where' => array(
+                            array('id_user', $id_user),
+                            array('id_list', $id_list)
+                        )
+                    ));
+
+                    if(!empty($belong))
+                    {
+                        $json = $this->response(array(
+                            'code' => 400,
+                            'message' => 'El usuario ya pertenece a la lista',
+                            'data' => []
+                        ));
+                        return $json;
+                    }
+                    else
+                    {
+                        $belong = New Model_Belong();
+                        $belong->id_user = $id_user;
+                        $belong->id_list = $id_list;
+                        $belong->save();
+
+                        $json = $this->response(array(
+                            'code' => 200,
+                            'message' => 'Usuario agregado a lista',
+                            'data' => ['list' => $id_list, 'user' => $id_user]
+                        ));
+                        return $json;
+                    }
+                }
+                else
+                {
+                    $json = $this->response(array(
+                        'code' => 400,
+                        'message' => 'No existe el usuario o la lista',
+                        'data' => []
+                    ));
+                    return $json;
+                }
+            }
         }
+        catch (Exception $e) 
+        {
+            $json = $this->response(array(
+                'code' => 500,
+                'message' => $e->getMessage(),
+                'data' => []
+            ));
+            return $json;
+        }
+    }
+
+    public function post_users()
+    {
+        
     }
 }

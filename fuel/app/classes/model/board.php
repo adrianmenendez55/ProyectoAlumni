@@ -14,6 +14,9 @@ class Model_Board extends Orm\Model
         'localization' => array(
             'data_type' => 'varchar'   
         ),
+        'image_board' => array(
+            'data_type' => 'varchar'   
+        ),
         'group' => array(
             'data_type' => 'int'   
         ),

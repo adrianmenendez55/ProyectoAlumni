@@ -10,6 +10,7 @@ class Board
             'title' => array('type' => 'varchar', 'constraint' => 100),
             'description' => array('type' => 'varchar', 'constraint' => 100),
             'localization' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
+            'image_board' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'group' => array('type' => 'int', 'constraint' => 100),
             'link' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'id_user' => array('type' => 'int', 'constraint' => 11, 'null' => true),
