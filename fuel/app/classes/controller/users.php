@@ -455,7 +455,7 @@ class Controller_Users extends Controller_Base
                     $token = $header['Authorization'];
                     $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
                 }
-            if (empty($_POST['username'])|| empty($_POST['email'])|| empty($_POST['description'])) 
+            if (empty($_POST['username'])|| empty($_POST['email'])|| empty($_POST['description']) || empty($_FILES['image_profile'])) 
                 {
                     $json = $this->response(array(
                         'code' => 400,
@@ -471,13 +471,62 @@ class Controller_Users extends Controller_Base
                     $user->username = '';
                     $user->email = '';
                     $user->description = '';
+                    $user->image_profile = '';
+                    
                     
                     
                
                     $user->save();
                     $user->username = $input['username'];
                     $user->email = $input['email'];
-                    $user->email = $input['description'];
+                    $user->description = $input['description'];
+                    
+                    if(!empty($_FILES['image_profile']))
+                    {
+                        // Custom configuration for this upload
+                        $config = array(
+                            'path' => DOCROOT . 'assets/img',
+                            'randomize' => true,
+                            'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+                        );
+
+                        // process the uploaded files in $_FILES
+                        Upload::process($config);
+                        // if there are any valid files
+                        if (Upload::is_valid())
+                        {
+                            // save them according to the config
+                            Upload::save();
+                            foreach(Upload::get_files() as $file)
+                            {
+                                $users = Model_Users::find($dataJwtUser);
+                                /*$users->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];*/
+                                $users->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/alumni/AlumniFinal/public/assets/img/' . $file['saved_as'];
+                                $users->save();
+                            }
+                        }
+                        // and process any errors
+                        foreach (Upload::get_errors() as $file)
+                        {
+                            return $this->response(array(
+                            'code' => 500,
+                            ));
+                        }
+                        return $this->response(array(
+                            'code' => 200,
+                            'message' => 'Foto subida correctamente',
+                            'data' => []
+                        ));
+                    }
+                    else
+                    {
+                        $json = $this->response(array(
+                        'code' => 400,
+                        'message' =>  'Ya hay una foto subida',
+                        'data' => []
+                    ));
+                    return $json;
+                    }
                     
                     
                
@@ -486,7 +535,7 @@ class Controller_Users extends Controller_Base
                     $json = $this->response(array(
                         'code' => 200,
                         'message' =>  'Perfil modificado',
-                        'data' => []
+                        'data' => ['userData' => $user]
                 ));
                 return $json;
                 
@@ -605,7 +654,6 @@ class Controller_Users extends Controller_Base
     public function post_upload()
     {
         $header = apache_request_headers();
-
         if (isset($header['Authorization'])) 
         {
             $token = $header['Authorization'];
@@ -618,6 +666,7 @@ class Controller_Users extends Controller_Base
             'randomize' => true,
             'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
         );
+
         // process the uploaded files in $_FILES
         Upload::process($config);
         // if there are any valid files
@@ -627,9 +676,9 @@ class Controller_Users extends Controller_Base
             Upload::save();
             foreach(Upload::get_files() as $file)
             {
-                $image = Model_Users::find($dataJwtUser);
-                $image->image_profile = $file;
-                $image->save();
+                $users = Model_Users::find($dataJwtUser);
+                $users->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];
+                $users->save();
             }
         }
         // and process any errors
@@ -641,6 +690,8 @@ class Controller_Users extends Controller_Base
         }
         return $this->response(array(
             'code' => 200,
+            'message' => 'Foto subida correctamente',
+            'data' => []
         ));
     }   
 }
