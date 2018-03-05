@@ -174,7 +174,20 @@ class Controller_Board extends Controller_Rest
     public function get_boards()
     {
         $board = Model_Board::find('all');
-        return $this->response(Arr::reindex($board));
+
+        if($board != null)
+        {
+            return $this->response(Arr::reindex($board));
+        }
+        else
+        {
+            $json = $this->response(array(
+                'code' => 200,
+                'message' => 'No hay eventos creados',
+                'data' => []
+            ));
+            return $json;
+        }
     }
 
     public function isBoardCreated($title, $description, $group)

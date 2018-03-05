@@ -164,8 +164,57 @@ class Controller_Lists extends Controller_Rest
         }
     }
 
-    public function post_users()
+    public function get_users()
     {
-        
+        /*$header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }*/
+
+        if(empty($_GET['id_list']))
+        {
+            $json = $this->response(array(
+                'code' => 400,
+                'message' => 'Campos vacíos',
+                'data' => []
+            ));
+            return $json;
+        }
+        else
+        {
+            $id_list = $_GET['id_list'];
+
+            $belonging = Model_Belong::find('all', array(
+                'where' => array(
+                    array('id_list', $id_list),
+                ),
+            ));
+
+            if($belonging != null)
+            {
+                foreach ($belonging as $key => $belonging)
+                {    
+                    $user[] = Model_Belong::find($belonging->id_user);
+                }
+
+                $json = $this->response(array(
+                    'code' => 200,
+                    'message' => '',
+                    'data' => ['usersList' => $user]
+                ));
+                return $json;
+            }
+            else
+            {
+                $json = $this->response(array(
+                    'code' => 400,
+                    'message' => 'La lista no existe',
+                    'data' => []
+                ));
+                return $json;
+            }
+        }
     }
 }

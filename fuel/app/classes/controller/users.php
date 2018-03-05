@@ -356,6 +356,12 @@ class Controller_Users extends Controller_Base
          return $this->response(Arr::reindex($users));
     }
 
+    public function get_usersInactive()
+    {
+         $users = Model_Users::find('all');
+         return $this->response(Arr::reindex($users));
+    }
+
     public function isEmailCreated($email)
     {
         $users = Model_Users::find('all', array(
