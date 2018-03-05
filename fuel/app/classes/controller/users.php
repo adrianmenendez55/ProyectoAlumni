@@ -380,6 +380,14 @@ class Controller_Users extends Controller_Base
         }
     }
 
+    public function get_roles()
+    {
+        /*return $this->respuesta(500, 'trace');
+        exit;*/
+        $roles = Model_Roles::find('all');
+        return $this->response(Arr::reindex($roles));
+    }
+
 
     public function get_login()
     { 

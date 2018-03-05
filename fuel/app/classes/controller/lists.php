@@ -194,15 +194,16 @@ class Controller_Lists extends Controller_Rest
 
             if($belonging != null)
             {
-                foreach ($belonging as $key => $belonging)
-                {    
-                    $user[] = Model_Belong::find($belonging->id_user);
+                foreach ($belonging as $key => $belong)
+                {   
+                    $user[] = $belong[Model_Belong::find($belong->id_user)];
+                    var_dump($belong->id_user);
                 }
 
                 $json = $this->response(array(
                     'code' => 200,
-                    'message' => '',
-                    'data' => ['usersList' => $user]
+                    'message' => 'Usuarios de la lista',
+                    'data' => ['usersList' => $belonging]
                 ));
                 return $json;
             }
