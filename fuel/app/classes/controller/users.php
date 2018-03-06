@@ -356,6 +356,30 @@ class Controller_Users extends Controller_Base
          return $this->response(Arr::reindex($users));
     }
 
+    public function get_user()
+    {
+        $header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }
+
+         $users = Model_Users::find('all', array(
+            'where' => array(
+                array('id', $dataJwtUser->id)
+            )
+        ));
+         foreach ($users as $key => $user) {
+             # code...
+         }
+        return $this->response(array(
+                    'code' => 200,
+                    'message' => 'Datos del usuario',
+                    'data' => $user
+                ));
+    }
+
     public function get_usersInactive()
     {
          $users = Model_Users::find('all');

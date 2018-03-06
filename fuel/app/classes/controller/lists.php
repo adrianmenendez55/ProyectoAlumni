@@ -164,58 +164,157 @@ class Controller_Lists extends Controller_Rest
         }
     }
 
+    public function post_quitUser()
+    {
+        try
+        {
+            /*$header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }*/
+            if(empty($_POST['id_user']) || empty($_POST['id_list']))
+            {
+                $json = $this->response(array(
+                    'code' => 400,
+                    'message' => 'Campos vacíos',
+                    'data' => []
+                ));
+                return $json;
+            }
+            else
+            {
+                $id_user = $_POST['id_user'];
+                $id_list = $_POST['id_list'];
+
+                $user = Model_Users::find($id_user);
+                $list = Model_Lists::find($id_list);
+
+                if(isset($id_user) || !empty($id_user) || isset($id_list) || !empty($id_list))
+                {
+                    $belong = Model_Belong::find('first', array(
+                        'where' => array(
+                            array('id_user', $id_user),
+                            array('id_list', $id_list)
+                        )
+                    ));
+
+                    if(!empty($belong))
+                    {
+                        $belong->delete();
+
+                        $json = $this->response(array(
+                            'code' => 200,
+                            'message' => 'Usuario quitado de la lista',
+                            'data' => ['user' => $id_user]
+                        ));
+                        return $json; 
+                    }
+                    else
+                    {
+                       $json = $this->response(array(
+                            'code' => 400,
+                            'message' => 'El usuario ya está quitado de la lista',
+                            'data' => []
+                        ));
+                        return $json; 
+                    }
+                }
+                else
+                {
+                    $json = $this->response(array(
+                        'code' => 400,
+                        'message' => 'No existe el usuario o la lista',
+                        'data' => []
+                    ));
+                    return $json;
+                }
+            }
+        }
+        catch (Exception $e) 
+        {
+            $json = $this->response(array(
+                'code' => 500,
+                'message' => $e->getMessage(),
+                'data' => []
+            ));
+            return $json;
+        } 
+    }
+
     public function get_users()
     {
-        /*$header = apache_request_headers();
+        try 
+        {
+            /*$header = apache_request_headers();
             if (isset($header['Authorization'])) 
             {
                 $token = $header['Authorization'];
                 $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
             }*/
 
-        if(empty($_GET['id_list']))
-        {
-            $json = $this->response(array(
-                'code' => 400,
-                'message' => 'Campos vacíos',
-                'data' => []
-            ));
-            return $json;
-        }
-        else
-        {
-            $id_list = $_GET['id_list'];
-
-            $belonging = Model_Belong::find('all', array(
-                'where' => array(
-                    array('id_list', $id_list),
-                ),
-            ));
-
-            if($belonging != null)
+            if(empty($_GET['id_list']))
             {
-                foreach ($belonging as $key => $belong)
-                {   
-                    $user[] = $belong[Model_Belong::find($belong->id_user)];
-                    var_dump($belong->id_user);
-                }
-
                 $json = $this->response(array(
-                    'code' => 200,
-                    'message' => 'Usuarios de la lista',
-                    'data' => ['usersList' => $belonging]
+                    'code' => 400,
+                    'message' => 'Campos vacíos',
+                    'data' => []
                 ));
                 return $json;
             }
             else
             {
-                $json = $this->response(array(
-                    'code' => 400,
-                    'message' => 'La lista no existe',
-                    'data' => []
+                $id_list = $_GET['id_list'];
+
+                $belonging = Model_Belong::find('all', array(
+                    'where' => array(
+                        array('id_list', $id_list),
+                    ),
                 ));
-                return $json;
+
+                if($belonging != null)
+                {
+                    foreach ($belonging as $key => $belong)
+                    {   
+                        $new = Model_Users::find('all', array(
+                            'where' => array(
+                                array('id', $belong->id_user),
+                            ),
+                        ));
+                       
+                        foreach ($new as $key => $belon)
+                        {   
+                            $user[] = $belon;
+                        } 
+                    }
+                    
+                    $json = $this->response(array(
+                        'code' => 200,
+                        'message' => 'Usuarios de la lista',
+                        'data' => ['usersList' => $user]
+                    ));
+                    return $json;
+                }
+                else
+                {
+                    $json = $this->response(array(
+                        'code' => 400,
+                        'message' => 'La lista no existe',
+                        'data' => []
+                    ));
+                    return $json;
+                }
             }
+        }
+        catch(Exception $e)
+        {
+            $json = $this->response(array(
+                'code' => 500,
+                'message' => $e->getMessage(),
+                'data' => []
+            ));
+            return $json;
         }
     }
 }
