@@ -174,6 +174,7 @@ class Controller_Lists extends Controller_Rest
                 $token = $header['Authorization'];
                 $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
             }*/
+            
             if(empty($_POST['id_user']) || empty($_POST['id_list']))
             {
                 $json = $this->response(array(

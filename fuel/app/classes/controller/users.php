@@ -11,7 +11,12 @@ class Controller_Users extends Controller_Base
     {
         try {
 
-           
+            $header = apache_request_headers();
+            if (isset($header['Authorization'])) 
+            {
+                $token = $header['Authorization'];
+                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+            }
             
             if ( empty($_POST['email'])/* || empty($_POST['username'])*/) 
             {
@@ -345,7 +350,7 @@ class Controller_Users extends Controller_Base
         if ($user->active == 1){
         $users = Model_Users::find('all');
         return $this->response(Arr::reindex($users));
-    }*/
+        }*/
 
          $users = Model_Users::find('all', array(
             'where' => array(
@@ -359,11 +364,11 @@ class Controller_Users extends Controller_Base
     public function get_user()
     {
         $header = apache_request_headers();
-            if (isset($header['Authorization'])) 
-            {
-                $token = $header['Authorization'];
-                $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
-            }
+        if (isset($header['Authorization'])) 
+        {
+            $token = $header['Authorization'];
+            $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+        }
 
          $users = Model_Users::find('all', array(
             'where' => array(
@@ -382,6 +387,12 @@ class Controller_Users extends Controller_Base
 
     public function get_usersInactive()
     {
+        $header = apache_request_headers();
+        if (isset($header['Authorization'])) 
+        {
+            $token = $header['Authorization'];
+            $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
+        }
          $users = Model_Users::find('all');
          return $this->response(Arr::reindex($users));
     }
@@ -476,14 +487,8 @@ class Controller_Users extends Controller_Base
                 ));
                 return $json;
             }
-        } 
+    } 
 
-       /*  public function get_data_users()
-    {
-        
-        $users = Model_Users::find('all');
-        return $this->response(Arr::reindex($users));
-    }  */
     public function post_modify_profile(){
        
         try {
@@ -645,7 +650,6 @@ class Controller_Users extends Controller_Base
 
             if (isset($userSettings))
             {
-                
                 // Localización
                 if($location != 0 && $location != 1)
                 {
