@@ -38,3 +38,5 @@ ERROR - 2018-03-13 08:49:43 --> Runtime Recoverable error - Object of class stdC
 WARNING - 2018-03-13 08:59:43 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2018-03-13 09:01:08 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2018-03-13 09:14:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-13 10:14:21 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-13 10:16:50 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.

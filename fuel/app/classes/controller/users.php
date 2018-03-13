@@ -364,7 +364,16 @@ class Controller_Users extends Controller_Base
              
             )
         ));
-         return $this->response(Arr::reindex($users));
+
+        $json = $this->response(array(
+                    'code' => 200,
+                    'message' => 'Usuarios',
+                    'data' => Arr::reindex($users)
+                ));
+                return $json;
+
+
+        return $this->response(Arr::reindex($users));
     }
 
     public function get_user()
