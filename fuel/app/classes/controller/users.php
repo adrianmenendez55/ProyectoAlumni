@@ -381,13 +381,13 @@ class Controller_Users extends Controller_Base
                 array('id', $dataJwtUser->id)
             )
         ));
-         foreach ($users as $key => $user) {
+         /*foreach ($users as $key => $user) {
              # code...
-         }
+         }*/
         return $this->response(array(
                     'code' => 200,
                     'message' => 'Datos del usuario',
-                    'data' => $user
+                    'data' => $users
                 ));
     }
 

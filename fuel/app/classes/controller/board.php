@@ -180,7 +180,7 @@ class Controller_Board extends Controller_Rest
             $json = $this->response(array(
                 'code' => 200,
                 'message' => 'Eventos creados',
-                'data' => $board
+                'data' => Arr::reindex($board)
             ));
             return $json;
         }
