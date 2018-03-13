@@ -37,4 +37,17 @@ protected static $_belongs_to = array(
             'cascade_delete' => false,
         )
     );
+
+protected static $_many_many = array(
+    'lists' => array(
+            'key_from' => 'id',
+            'key_through_from' => 'id_user',
+            'table_through' => 'belong',
+            'key_through_to' => 'id_list',
+            'model_to' => 'Model_Lists',
+            'key_to' => 'id',
+            'cascade_save' => true,
+            'cascade_delete' => true,
+        )
+    );
 }

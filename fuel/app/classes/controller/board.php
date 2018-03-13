@@ -177,7 +177,12 @@ class Controller_Board extends Controller_Rest
 
         if($board != null)
         {
-            return $this->response(Arr::reindex($board));
+            $json = $this->response(array(
+                'code' => 200,
+                'message' => 'Eventos creados',
+                'data' => $board
+            ));
+            return $json;
         }
         else
         {

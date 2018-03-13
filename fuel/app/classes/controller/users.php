@@ -28,7 +28,8 @@ class Controller_Users extends Controller_Base
             }
 
             $email = $_POST['email'];
-            //$username = $_POST['username'];
+            $id_rol = $_POST['id_rol'];
+            $id_list = $_POST['id_list'];
 
 
             if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) == false)
@@ -51,13 +52,18 @@ class Controller_Users extends Controller_Base
                 return $json;
             }
 
-            $input = $_POST;
             $user = new Model_Users();
-           // $user->username = $input['username'];
-            $user->email = $input['email'];
+            $user->email = $email;
             $user->active = 0;
-            $user->id_rol = 2;
+            $user->id_rol = $id_rol;
             $user->save();
+
+
+
+            $list = Model_Lists::find($id_list);
+            $list->users[] = $user;
+            $list->save();
+
             $json = $this->response(array(
                 'code' => 200,
                 'message' => 'Usuario creado',

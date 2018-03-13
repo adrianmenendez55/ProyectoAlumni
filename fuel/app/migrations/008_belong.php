@@ -6,7 +6,7 @@ class Belong
     function up()
     {
         \DBUtil::create_table('belong', array(
-            'id_user' => array('type' => 'int', 'constraint' => 11,),
+            'id_user' => array('type' => 'int', 'constraint' => 11),
             'id_list' => array('type' => 'int', 'constraint' => 11),
         ), array('id_user','id_list'), false, 'InnoDB', 'utf8_unicode_ci',
 		    array(
@@ -27,7 +27,7 @@ class Belong
                         'table' => 'lists',
                         'column' => 'id',
                     ),
-                    'on_update' => 'CASCADE',
+                    'on_update' => 'RESTRICT',
                     'on_delete' => 'RESTRICT'
                 )
 		    )
