@@ -365,12 +365,12 @@ class Controller_Users extends Controller_Base
             )
         ));
 
-        $json = $this->response(array(
+        /*$json = $this->response(array(
                     'code' => 200,
                     'message' => 'Usuarios',
                     'data' => Arr::reindex($users)
                 ));
-                return $json;
+                return $json;*/
 
 
         return $this->response(Arr::reindex($users));
