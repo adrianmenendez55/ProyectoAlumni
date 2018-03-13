@@ -37,3 +37,4 @@ WARNING - 2018-03-13 08:49:43 --> Fuel\Core\Fuel::init - The configured locale e
 ERROR - 2018-03-13 08:49:43 --> Runtime Recoverable error - Object of class stdClass could not be converted to string in /var/www/html/AlumniFinal/fuel/core/classes/database/connection.php on line 600
 WARNING - 2018-03-13 08:59:43 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 WARNING - 2018-03-13 09:01:08 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-13 09:14:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
