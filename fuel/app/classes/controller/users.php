@@ -358,20 +358,18 @@ class Controller_Users extends Controller_Base
         return $this->response(Arr::reindex($users));
         }*/
 
-         $users = Model_Users::find('all', array(
+        $users = Model_Users::find('all', array(
             'where' => array(
                 array('active', 1),
-             
             )
         ));
 
         /*$json = $this->response(array(
-                    'code' => 200,
-                    'message' => 'Usuarios',
-                    'data' => Arr::reindex($users)
-                ));
-                return $json;*/
-
+                'code' => 200,
+                'message' => 'Usuarios',
+                'data' => Arr::reindex($users)
+            ));
+        return $json;*/
 
         return $this->response(Arr::reindex($users));
     }
@@ -408,9 +406,10 @@ class Controller_Users extends Controller_Base
             $token = $header['Authorization'];
             $dataJwtUser = JWT::decode($token, $this->key, array('HS256'));
         }
-         $users = Model_Users::find('all');
+         $users = Model_Users::query()->related('roles')->get();
          return $this->response(Arr::reindex($users));
     }
+
 
     public function isEmailCreated($email)
     {

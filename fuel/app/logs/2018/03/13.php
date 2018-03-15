@@ -43,3 +43,5 @@ WARNING - 2018-03-13 10:16:50 --> Fuel\Core\Fuel::init - The configured locale e
 WARNING - 2018-03-13 10:29:07 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
 ERROR - 2018-03-13 10:29:07 --> 1698 - SQLSTATE[HY000] [1698] Access denied for user 'alumni'@'localhost' in /var/www/html/AlumniFinal/fuel/core/classes/database/pdo/connection.php on line 112
 WARNING - 2018-03-13 10:29:34 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-13 10:39:21 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
+WARNING - 2018-03-13 10:40:31 --> Fuel\Core\Fuel::init - The configured locale en_US is not installed on your system.
