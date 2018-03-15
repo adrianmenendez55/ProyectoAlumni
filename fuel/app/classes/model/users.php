@@ -38,6 +38,16 @@ protected static $_belongs_to = array(
         )
     );
 
+protected static $_has_many = array(
+        'settings' => array(
+            'key_from' => 'id',
+            'model_to' => 'Model_Settings',
+            'key_to' => 'id_user',
+            'cascade_save' => false,
+            'cascade_delete' => false,
+        )
+    );
+
 protected static $_many_many = array(
     'lists' => array(
             'key_from' => 'id',
@@ -47,7 +57,7 @@ protected static $_many_many = array(
             'model_to' => 'Model_Lists',
             'key_to' => 'id',
             'cascade_save' => true,
-            'cascade_delete' => true,
+            'cascade_delete' => false,
         )
     );
 }

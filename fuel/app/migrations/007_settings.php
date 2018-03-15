@@ -23,7 +23,7 @@ class Settings
                         'table' => 'users',
                         'column' => 'id',
                     ),
-                    'on_update' => 'CASCADE',
+                    'on_update' => 'RESTRICT',
                     'on_delete' => 'CASCADE'
                 )
             )

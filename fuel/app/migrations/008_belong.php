@@ -18,7 +18,7 @@ class Belong
 		                'column' => 'id',
 		            ),
 		            'on_update' => 'CASCADE',
-		            'on_delete' => 'RESTRICT'
+		            'on_delete' => 'CASCADE'
 		        ),
                 array(
                     'constraint' => 'foreignKeyFromBelongToLists',
@@ -27,7 +27,7 @@ class Belong
                         'table' => 'lists',
                         'column' => 'id',
                     ),
-                    'on_update' => 'RESTRICT',
+                    'on_update' => 'CASCADE',
                     'on_delete' => 'RESTRICT'
                 )
 		    )
