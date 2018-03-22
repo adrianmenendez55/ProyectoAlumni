@@ -723,9 +723,15 @@ class Controller_Users extends Controller_Base
             Upload::save();
             foreach(Upload::get_files() as $file)
             {
+<<<<<<< HEAD
                 $users = Model_Users::find($dataJwtUser);
                 $users->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];
                 $users->save();
+=======
+                $image = Model_Users::find($dataJwtUser->id);
+                $image->image_profile = 'http://' . $_SERVER['SERVER_NAME'] . '/AlumniFinal/public/assets/img/' . $file['saved_as'];
+                $image->save();
+>>>>>>> 21faa4faf702f9f63c8f062d36a60e3dd89bf772
             }
         }
         // and process any errors
